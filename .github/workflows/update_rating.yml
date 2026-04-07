@@ -1,4 +1,4 @@
-name: Update Rating Stats
+name: Update Rating Stats and Reviews
 
 on:
   schedule:
@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 jobs:
-  update-rating:
+  update-data:
     runs-on: ubuntu-latest
     
     steps:
@@ -26,14 +26,14 @@ jobs:
       run: |
         pip install pymongo dnspython
         
-    - name: Run update script
+    - name: Run update rating script
       env:
         MONGO_URL: ${{ secrets.MONGO_URL }}
         MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
       run: |
         python update_rating.py
         
-    - name: Commit and push if changed
+    - name: Commit and push rating if changed
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
@@ -42,9 +42,32 @@ jobs:
         git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
         git add rating_stats.json
         if git diff --staged --quiet; then
-          echo "No changes to commit."
+          echo "No rating changes to commit."
         else
           git commit -m "Auto-update rating stats [skip ci]"
           git push origin main
-          echo "Changes pushed."
+          echo "Rating changes pushed."
+        fi
+        
+    - name: Run export reviews script
+      env:
+        MONGO_URL: ${{ secrets.MONGO_URL }}
+        MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
+      run: |
+        python export_reviews.py
+        
+    - name: Commit and push reviews if changed
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
+        git add reviews.json
+        if git diff --staged --quiet; then
+          echo "No reviews changes to commit."
+        else
+          git commit -m "Auto-update reviews [skip ci]"
+          git push origin main
+          echo "Reviews changes pushed."
         fi
