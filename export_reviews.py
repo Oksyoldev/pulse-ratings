@@ -14,9 +14,9 @@ db = client[MONGO_DB_NAME]
 reviews_collection = db["reviews"]
 
 def get_reviews(limit=20):
-    """Получает последние 20 одобренных отзывов"""
+    """Получает последние 20 ОДОБРЕННЫХ отзывов"""
     cursor = reviews_collection.find(
-        {"approved": True}
+        {"status": "approved"}  # Только одобренные!
     ).sort("created_at", -1).limit(limit)
     
     reviews = []
