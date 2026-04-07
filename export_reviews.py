@@ -40,4 +40,4 @@ output = {
 with open("reviews.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
 
-print(f"✅ Экспортировано {len(reviews)} отзывов")
+print(f"Экспортировано {len(reviews)} отзывов")
