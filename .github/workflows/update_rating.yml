@@ -30,6 +30,8 @@ jobs:
         python update_rating.py
         
     - name: Commit and push if changed
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
