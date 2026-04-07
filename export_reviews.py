@@ -14,9 +14,9 @@ db = client[MONGO_DB_NAME]
 reviews_collection = db["reviews"]
 
 def get_reviews(limit=20):
-    """Получает последние 20 ОДОБРЕННЫХ отзывов"""
+    """Получает последние 20 одобренных отзывов"""
     cursor = reviews_collection.find(
-        {"status": "approved"}  # Только одобренные!
+        {"approved": True}
     ).sort("created_at", -1).limit(limit)
     
     reviews = []
@@ -25,6 +25,7 @@ def get_reviews(limit=20):
             "username": r.get("username", "Аноним"),
             "review": r.get("review", ""),
             "rating": r.get("rating"),
+            "photo_url": r.get("photo_url"),  # 👈 ДОБАВЛЕНО
             "date": r.get("created_at").isoformat() if r.get("created_at") else None
         })
     return reviews
@@ -40,4 +41,4 @@ output = {
 with open("reviews.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
 
-print(f"Экспортировано {len(reviews)} отзывов")
+print(f"[OK] Экспортировано {len(reviews)} отзывов")
