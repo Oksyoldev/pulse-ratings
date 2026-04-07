@@ -1,0 +1,43 @@
+name: Update Rating Stats
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update-rating:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install pymongo dnspython
+        
+    - name: Run update script
+      env:
+        MONGO_URL: ${{ secrets.MONGO_URL }}
+        MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
+      run: |
+        python update_rating.py
+        
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add rating_stats.json
+        if git diff --staged --quiet; then
+          echo "No changes to commit."
+        else
+          git commit -m "Auto-update rating stats [skip ci]"
+          git push origin main
+          echo "Changes pushed."
+        fi
