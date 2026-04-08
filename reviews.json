@@ -3,17 +3,24 @@
     "reviews": [
       {
         "name": "Mansory",
+        "review": "курс норм а вот бы лучше",
+        "rating": null,
+        "photo_url": null,
+        "date": "2026-04-08T16:09:09.770000"
+      },
+      {
+        "name": "Mansory",
         "review": "да мне все понравилось спс",
         "rating": null,
         "photo_url": null,
         "date": "2026-04-08T15:56:42.832000"
       }
     ],
-    "total": 1
+    "total": 2
   },
   "pro": {
     "reviews": [],
     "total": 0
   },
-  "updated_at": "2026-04-08T15:58:09.641274"
+  "updated_at": "2026-04-08T16:09:13.930744"
 }
