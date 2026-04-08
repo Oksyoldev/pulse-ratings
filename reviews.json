@@ -1,24 +1,19 @@
 {
-  "reviews": [
-    {
-      "username": "@tozhest",
-      "review": "довольно классный курс да",
-      "rating": null,
-      "date": "2026-04-08T15:26:43.523000"
-    },
-    {
-      "username": "@oksyol",
-      "review": "курс топовый имба",
-      "rating": null,
-      "date": "2026-04-07T20:37:09.886000"
-    },
-    {
-      "username": "@tozhest",
-      "review": "кукукукукуку пезщкещпщзке",
-      "rating": null,
-      "date": "2026-04-07T20:27:52.799000"
-    }
-  ],
-  "total": 3,
-  "updated_at": "2026-04-08T15:29:42.580738"
+  "free": {
+    "reviews": [
+      {
+        "name": "Mansory",
+        "review": "да мне все понравилось спс",
+        "rating": null,
+        "photo_url": null,
+        "date": "2026-04-08T15:56:42.832000"
+      }
+    ],
+    "total": 1
+  },
+  "pro": {
+    "reviews": [],
+    "total": 0
+  },
+  "updated_at": "2026-04-08T15:58:09.641274"
 }
