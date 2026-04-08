@@ -13,32 +13,40 @@ client = MongoClient(MONGO_URL)
 db = client[MONGO_DB_NAME]
 reviews_collection = db["reviews"]
 
-def get_reviews(limit=20):
-    """Получает последние 20 одобренных отзывов"""
+def get_reviews_by_type(course_type: str, limit=20):
+    """Получает последние одобренные отзывы для конкретного курса"""
     cursor = reviews_collection.find(
-        {"approved": True}
+        {"status": "approved", "course_type": course_type}
     ).sort("created_at", -1).limit(limit)
     
     reviews = []
     for r in cursor:
         reviews.append({
-            "username": r.get("username", "Аноним"),
+            "name": r.get("username", "Пользователь"),  # только имя, без @
             "review": r.get("review", ""),
             "rating": r.get("rating"),
-            "photo_url": r.get("photo_url"),  # 👈 ДОБАВЛЕНО
+            "photo_url": r.get("photo_url"),
             "date": r.get("created_at").isoformat() if r.get("created_at") else None
         })
     return reviews
 
-reviews = get_reviews()
+# Экспортируем оба типа
+free_reviews = get_reviews_by_type("free")
+pro_reviews = get_reviews_by_type("pro")
 
 output = {
-    "reviews": reviews,
-    "total": len(reviews),
+    "free": {
+        "reviews": free_reviews,
+        "total": len(free_reviews)
+    },
+    "pro": {
+        "reviews": pro_reviews,
+        "total": len(pro_reviews)
+    },
     "updated_at": datetime.utcnow().isoformat()
 }
 
 with open("reviews.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
 
-print(f"[OK] Экспортировано {len(reviews)} отзывов")
+print(f"[OK] Экспортировано отзывов: бесплатных {len(free_reviews)}, платных {len(pro_reviews)}")
