@@ -19,8 +19,16 @@
     "total": 2
   },
   "pro": {
-    "reviews": [],
-    "total": 0
+    "reviews": [
+      {
+        "name": "Mansory",
+        "review": "ахвхавхавх хав ахв ахвха вх ах",
+        "rating": null,
+        "photo_url": null,
+        "date": "2026-04-08T16:10:43.557000"
+      }
+    ],
+    "total": 1
   },
-  "updated_at": "2026-04-08T16:09:13.930744"
+  "updated_at": "2026-04-08T16:10:47.187086"
 }
