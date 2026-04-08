@@ -56,7 +56,7 @@ jobs:
       run: |
         python export_reviews.py
         
-    - name: Commit and push reviews if changed
+    - name: Commit and push reviews and avatars if changed
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
@@ -64,10 +64,11 @@ jobs:
         git config --local user.name "GitHub Action"
         git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
         git add reviews.json
+        git add avatars/ --ignore-errors
         if git diff --staged --quiet; then
-          echo "No reviews changes to commit."
+          echo "No reviews or avatars changes to commit."
         else
-          git commit -m "Auto-update reviews [skip ci]"
+          git commit -m "Auto-update reviews and avatars [skip ci]"
           git push origin main
-          echo "Reviews changes pushed."
+          echo "Reviews and avatars changes pushed."
         fi
