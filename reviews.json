@@ -2,6 +2,13 @@
   "free": {
     "reviews": [
       {
+        "name": "Oksyol",
+        "review": "хароший мне нра",
+        "rating": null,
+        "photo_url": null,
+        "date": "2026-10-18T21:22:24.874000"
+      },
+      {
         "name": "Mansory",
         "review": "gthiogthgihot",
         "rating": null,
@@ -23,7 +30,7 @@
         "date": "2026-04-08T15:56:42.832000"
       }
     ],
-    "total": 3
+    "total": 4
   },
   "pro": {
     "reviews": [
@@ -44,5 +51,5 @@
     ],
     "total": 2
   },
-  "updated_at": "2026-04-10T14:34:47.127313"
+  "updated_at": "2026-10-18T21:24:07.916195"
 }
