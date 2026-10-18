@@ -2,6 +2,13 @@
   "free": {
     "reviews": [
       {
+        "name": "𝑴𝒂𝒓𝒊𝒚𝒂🤍",
+        "review": "ХАХАХАХААХХАХАА",
+        "rating": null,
+        "photo_url": null,
+        "date": "2026-10-18T21:37:15.136000"
+      },
+      {
         "name": "Oksyol",
         "review": "хароший мне нра",
         "rating": null,
@@ -30,7 +37,7 @@
         "date": "2026-04-08T15:56:42.832000"
       }
     ],
-    "total": 4
+    "total": 5
   },
   "pro": {
     "reviews": [
@@ -51,5 +58,5 @@
     ],
     "total": 2
   },
-  "updated_at": "2026-10-18T21:24:07.916195"
+  "updated_at": "2026-10-18T22:06:43.449202"
 }
